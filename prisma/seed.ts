@@ -69,25 +69,11 @@ async function main() {
   console.log("Database has been seeded successfully.");
 }
 
-export async function seedDatabase() {
-  try {
-    await main();
-  } catch (e) {
+main()
+  .catch((e) => {
     console.error(e);
-    throw new Error("Failed to seed database");
-  } finally {
+    process.exit(1);
+  })
+  .finally(async () => {
     await prisma.$disconnect();
-  }
-}
-
-// Run the seed function if this script is executed directly
-if (require.main === module) {
-  seedDatabase()
-    .then(() => {
-      console.log("Seeding completed.");
-    })
-    .catch((e) => {
-      console.error("Seeding failed:", e);
-      process.exit(1);
-    });
-}
+  });
