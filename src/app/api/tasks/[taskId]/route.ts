@@ -30,6 +30,7 @@ export async function PUT(request: Request, { params }: { params: IParams }) {
 
     return NextResponse.json(updatedTask);
   } catch (error) {
+    console.error("Error updating task:", error);
     return NextResponse.json({ error: "Error updating task" }, { status: 500 });
   }
 }
@@ -54,6 +55,7 @@ export async function DELETE(
     // Return a 204 No Content response on successful deletion
     return new NextResponse(null, { status: 204 });
   } catch (error) {
+    console.error("Error deleting task:", error);
     return NextResponse.json({ error: "Error deleting task" }, { status: 500 });
   }
 }
